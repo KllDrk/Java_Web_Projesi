@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,ininal-scale=1.0">
+<title>Pedagojik Formasyon Formu</title>
+<link rel="stylesheet" href="register.css">
+<style>
+	body{
+	margin:0;
+	padding:0;
+	background: rgb(40,247,190);
+	}
+	.singup-form{
+	height:100%;
+	width:98%;
+	padding:1%;
+	text-align:center;
+	background: rgb(9,230,169);
+	}
+	.singup-form1{
+	height:100%;
+	width:202%;
+	padding:1%;
+	margin-top:1%;
+	text-align:center;
+	background: rgb(9,230,169);
+	}
+	.singup-form h1{
+		color: aliceblue;
+		margin-top:10px;
+		font-family:"Times New Roman";
+	}
+	.radio{
+	margin:0 0px;
+	}
+	.singup-form input{
+		display: block;
+		width:100%;
+		padding:0 16px;
+		height: 44px;
+		text-align:center;
+		box-sizing:border-box;
+		border:none;
+	}
+	.txt{
+	background:blueviolent;
+	}
+	.singup-btn{
+	margin-top:60px;
+	margin-bottom:20px;
+	background:blueviolent;
+	color:rgb(128, 0, 255);
+	border-radius:100px;
+	font-size:30px;
+	font-family:"Times New Roman";
+	cursor:pointer;
+	transition:0.8s;
+	display:block;
+	}
+	.singup-btn1{
+	width:30%;
+	margin-left:35%;
+	margin-top:60px;
+	background:blueviolent;
+	margin-bottom:20px;
+	color:rgb(128, 0, 255);
+	border-radius:100px;
+	font-size:30px;
+	font-family:"Times New Roman";
+	cursor:pointer;
+	transition:0.8s;
+	display:block;
+	}
+	.singup-btn:hover{
+		transform: scale(0.96);
+		background:rgb(255, 0, 255);
+		color:aliceblue;
+	}
+	.singup-btn1:hover{
+		transform: scale(0.96);
+		background:rgb(255, 0, 255);
+		color:aliceblue;
+	}
+	.singup-form a{
+	text-decoration:none;
+	color:rgb(255, 0, 255);
+	padding:10px;
+	transition:0.8s;
+	display:block;
+	}
+	.singup-btn a:hover{
+		color:aquamarine;
+	}
+	.singup-btn1 a:hover{
+		color:aquamarine;
+	}
+	.grid{
+		display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:10px;
+	}
+	.grid1{
+		display:grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		gap:2px;
+	}
+	.labelClass{
+		text-align:left;
+	}
+	.gridForm{
+		display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:2%;
+	}
+	.grid2{
+		display:grid;
+        gap:10px;
+	}
+	.grid3{
+		display:grid;
+		grid-template-columns: 1fr 20fr;
+		gap:2px;
+	}
+	.grid4{
+		display:grid;
+		grid-template-columns: 3fr 1fr;
+		gap:2px;
+	}
+	.grid5{
+		display:grid;
+		grid-template-columns: 1fr 2fr;
+		gap:2px;
+	}
+	h1{
+	text-align: center;
+	font-family:"Times New Roman";
+	color : rgb(208, 255, 221);
+	font-size: 70px;
+	}
+	h2{
+	text-align: center;
+	font-family:"Times New Roman";
+	color : rgb(208, 255, 221);
+	font-size: 35px;
+	}
+</style>
+</head>
+<body>
+		<h1>Pedagojik Formasyon Ön Başvuru Formu</h1>
+	<div class="gridForm">
+		<div class="singup-form">
+		<form action="register.html" th:action="@{/register}" th:object="${kullanici}" method="post">
+		<h2>Kimlik Bilgileri</h2>
+			<div class="grid2">
+				<input type="text" placeholder="TC No" th:field="*{kullaniciTC}" class="txt">
+			<div class="grid">
+				<input type="text" placeholder="Ad" th:field="*{kullaniciAd}" class="txt">
+				<input type="text" placeholder="Soyad" th:field="*{kullaniciSoyad}" class="txt">
+				<input type="text" placeholder="Anne" th:field="*{kullaniciAnne}" class="txt">
+				<input type="text" placeholder="Baba" th:field="*{kulllaniciBaba}" class="txt">
+				<input type="date" placeholder="Dogum Tarihi" th:field="*{kullaniciDogumTarih}" class="txt">
+				<input type="file" accepts="image/png,image/jpg" th:field="*{kullaniciResim}" class="txt">
+				<label>Cinsiyet:</label>
+				<label>Özel Durum</label>	
+			</div>
+			<div class="grid1">
+				<input type="radio" name="kullaniciCinsiyet" id="erkek" class="radio" value="erkek">
+				<label class="labelClass" for="erkek">Erkek</label>
+				<input type="radio" name="kullaniciCinsiyet" id="kadın" class="radio" value="kadın">
+				<label class="labelClass" for="kadın">Kadın</label>
+				<input type="radio" name="kullaniciOzelDurum" id="evet" class="radio" value="evet">
+				<label class="labelClass" for="evet">Evet</label>
+				<input type="radio" name="kullaniciOzelDurum" id="hayır" class="radio" value="hayır">
+				<label class="labelClass" for="hayır">Hayır</label>
+			</div>
+			<div class="grid">
+			<h3>Açık Formasyon Bölümleri</h3>
+			<select name="kullaniciFormasyon">
+				<option value="nullFormasyon">Seçiniz...</option>
+				<option value="biyoloji">Biyoloji</option>
+				<option value="felsefe">Felsefe</option>
+				<option value="fizik">Fizik</option>
+				<option value="gorselSanatlar">Görsel Sanatlar</option>
+				<option value="grafik">Grafik</option>
+				<option value="imamaHatipMeslekDersler">İmam Hatip Meslek Dersleri</option>
+				<option value="ingilizce">İngilizce</option>
+				<option value="kimya/kimyaTeknolojisi">Kimya/Kimya Teklonojisi</option>
+				<option value="matematik">Matematik</option>
+				<option value="muhasebeVeFinansman">Muhasebe ve Finansman</option>
+				<option value="muzik">Müzik</option>
+				<option value="tarih">Tarih</option>
+				<option value="turkDiliVeEdebiyati">Türk Dili ve Edebiyatı</option>
+				<option value="bedenEgitimi">Beden Eğitimi</option>
+			</select>
+			<a href="#">Formasyon Denklik Tablosu</a>
+			</div>
+			
+			</div>
+		
+		</form>
+	</div>
+	<div class="singup-form">
+		<form action="register.html" th:action="@{/register}" th:object="${kullanici}" method="post">
+		<h2>İletişim Bilgileri</h2>
+		<div class="grid">
+			<input type="email" placeholder="Mail Adresi" th:field="*{kullaniciMail}" class="txt">
+			<input type="text" placeholder="Telefon Numarası" th:field="*{kullaniciTelefon}" class="txt">
+		</div>
+		<br>
+		<div class="grid2">
+			<input type="text" placeholder="Adres Bilgisi" th:field="*{kullaniciAdres}" class="txt">
+		</div>
+			<br>
+		</form>
+	<form action="register.html" th:action="@{/register}" th:object="${kullanici}" method="post">
+		<h2>Eğitim Bilgileri</h2>
+		<div class="grid">
+				<input type="text" placeholder="Üniversite" th:field="*{kullaniciUniversite}" class="txt">
+				<input type="text" placeholder="Fakülte" th:field="*{kullaniciFakulte}" class="txt">
+				<input type="text" placeholder="Bölüm/Program" th:field="*{kullaniciProgram}" class="txt">
+				<input type="date" placeholder="Tarih" th:field="*{kullaniciTarih}" class="txt">
+				<br>
+			</div>
+			<div class="grid2">
+				<input type="number" placeholder="Adres Bilgisi" th:field="*{kullaniciMezunNotu}" class="txt">
+				</div>
+
+	</form>
+	</div>
+	<div class="singup-form1">
+		<div class="grid2">
+			<form action="register.html" th:action="@{/register}" th:object="${kullanici}" method="post">
+				<div class="grid">
+					<div class="grid3">
+						<input type="checkbox" name="kullaniciOnaylama"/>
+						<label>Bu ön başvuru formunda girdiğim bilgilerin doğru olduğunu beyan eder, yanlış bilgi girişinden kaynaklı tüm sorumluluğun şahsıma ait olduğunu ve bu çerçevede ortaya çıkabilecek tüm hak kaybının bu kapsamda değerlendirileceğini okudum, onaylıyorum.</label>
+					</div>
+					<input type="submit" value="Kayıt Ol" class="singup-btn">
+				</div>
+			</form>
+			<label></label>
+			<form action="AdminPanel.html" th:action="@{/adminPanel}">
+				<div class="grid">
+					<input type="submit" value="Admin Panel" class="singup-btn">
+				</div>
+			</form>
+		</div>
+		<label></label>
+	</div>
+</div>
+</body>
+</html>

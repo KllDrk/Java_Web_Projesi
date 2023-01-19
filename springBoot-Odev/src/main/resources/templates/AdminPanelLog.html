@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+	<html lang="en" xmlns="https://www.thymeleaf.org">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width,ininal-scale=1.0">
+		<title>Admin Paneli</title>
+		<link rel="stylesheet">
+	<style>
+	
+	body{
+		margin:0;
+		padding:0;
+		background: rgb(177, 252, 252);
+	}
+	
+	.adminPanel-Form h1{
+		color: rgb(0,0,0);
+		margin-top:10px;
+		font-family:"Times New Roman";
+		text-align:center;
+	}
+	.adminPanel-Form{
+		height:100%;
+		width:100%;
+		text-align:center;
+		background: rgb(123, 232, 240);
+	}
+	
+	.admin-panel{
+		width:100%;
+		background: rgb(123, 232, 240);
+		overflow:hidden;
+	}
+	
+	.grid{
+		display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap:10px;
+	}
+	
+	.content-table{
+		border-collapse : collapse;
+		font-size: 0.9em;
+		width:100%;
+		height:80%;
+		min-width: max-content;
+	}
+	
+	.content-table thead tr{
+		background-color: rgb(48, 140, 216);
+		color : white;
+		text-align: left;
+		position: sticky;
+	}
+	
+	.content-table td,.content-table th{
+		padding: 12px 15px;
+		border:1px solid rgb(48, 140, 216);
+	}
+	
+	.content-table tbody tr:nth-child(even){
+		background: rgb(91, 194, 244);
+	}
+	
+	.content-table tbody tr:nth-child(odd){
+		background: rgb(139, 213, 248);
+	}
+	
+	.content-table th{
+		background:rgb(48, 140, 216);
+		position: sticky;
+		top:0px;
+	}
+	
+	.table-wrapper{
+		max-height:40%;
+		overflow-y:scroll;
+	}
+	
+	.grid1{
+	display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:2%;
+	}
+	.grid2{
+		display:grid;
+        grid-template-columns: 25% 73%;
+        gap:2%;
+	}
+	
+	.grid3{
+		display:grid;
+	}
+	
+	.grid4{
+		display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap:2%;
+	}
+	.grid5{
+		display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap:2%;
+	}
+	
+	.singup-btn{
+	height:50px;
+	background:blueviolent;
+	color:rgb(48, 140, 216);
+	border-radius:100px;
+	font-size:30px;
+	font-family:"Times New Roman";
+	cursor:pointer;
+	transition:0.8s;
+	}
+	
+	.singup-btn:hover{
+		transform: scale(0.96);
+		background:rgb(0, 64, 128);
+		color:aliceblue;
+	}
+	
+	.singup-btn a:hover{
+		color:aquamarine;
+	}
+	
+	.txt{
+	background:rgb(255, 255, 255);
+	}
+	
+	.sorgu-panel input{
+		display: block;
+		width:100%;
+		margin-bottom:5%;
+		padding:0 16px;
+		height: 44px;
+		text-align:center;
+		box-sizing:border-box;
+		border:none;
+	}
+	</style>
+</head>
+<body>
+	<!-- table-layout:fixed-->
+	<div class="adminPanel-Form">
+		<h1>Log Kayıtları</h1>
+				<form class="admin-panel">
+				<input action="AdminPanelLog.html" th:action="@{/adminPanel/log}" th:object="${logKullanici}" type="submit" value="Log Kayıtlarını Güncelle" class="singup-btn">	
+							<div class="outer-wrapper">
+								<div class="table-wrapper">
+									<table class="content-table">
+										<thead class="thead-dark">
+											<th scope="row" onclick="sortTable0(0)">logID</th>
+											<th scope="row" onclick="sortTable0(1)">Log_Kayıt</th>
+										</thead>
+									<tbody>
+										<tr th:each="logKullanici : ${logKullanicilar}">
+											<td th:text="${logKullanici.logID}"></td>
+											<td th:text="${logKullanici.logAciklama}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</form>
+			</div>
+		<script>
+		function sortTable0(n) {
+			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+			  table = document.getElementById("myTable0");
+			  switching = true;
+			  dir = "asc"; 
+			  while (switching) {
+			    switching = false;
+			    rows = table.rows;
+			    for (i = 1; i < (rows.length - 1); i++) {
+			      shouldSwitch = false;
+			      x = rows[i].getElementsByTagName("TD")[n];
+			      y = rows[i + 1].getElementsByTagName("TD")[n];
+			      if (dir == "asc") {
+			        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			          shouldSwitch= true;
+			          break;
+			        }
+			      } else if (dir == "desc") {
+			        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+			          shouldSwitch = true;
+			          break;
+			        }
+			      }
+			    }
+			    if (shouldSwitch) {
+			      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			      switching = true;
+			      switchcount ++;      
+			    } else {
+			      if (switchcount == 0 && dir == "asc") {
+			        dir = "desc";
+			        switching = true;
+			      }
+			    }
+			  }
+			}
+		
+		</script>
+</body>
+</html>

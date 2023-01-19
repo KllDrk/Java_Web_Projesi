@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+	<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width,ininal-scale=1.0">
+		<title>Admin Hesap Ekleme</title>
+	<style>
+	
+	body{
+		margin:0;
+		padding:0;
+		background:rgb(177, 252, 252);
+	}
+		
+	.singup-form{
+		height:100%;
+		width:98%;
+		padding:1%;
+		text-align:center;
+		background: rgb(123, 232, 240);
+	}
+	
+	.singup-form1{
+		height:100%;
+		width:202%;
+		padding:1%;
+		margin-top:1%;
+		text-align:center;
+		background: rgb(123, 232, 240);
+	}
+	
+	.singup-form h1{
+		color: rgb(0,0,0);
+		margin-top:10px;
+		font-family:"Times New Roman";
+	}
+	
+	.radio{
+	margin:0 0px;
+	}
+	
+	.singup-form input{
+		display: block;
+		width:100%;
+		padding:0 16px;
+		height: 44px;
+		text-align:center;
+		box-sizing:border-box;
+		border:none;
+	}
+	
+	.txt{
+		background:rgb(255, 255, 255);
+	}
+	
+	.singup-btn{
+		margin-top:60px;
+		margin-bottom:20px;
+		background:blueviolent;
+		color:rgb(48, 140, 216);
+		border-radius:100px;
+		font-size:30px;
+		font-family:"Times New Roman";
+		cursor:pointer;
+		transition:0.8s;
+		display:block;
+	}
+	
+	.singup-btn1{
+		width:100%;
+		margin-top:60px;
+		background:blueviolent;
+		margin-bottom:20px;
+		color:rgb(48, 140, 216);
+		border-radius:100px;
+		font-size:30px;
+		font-family:"Times New Roman";
+		cursor:pointer;
+		transition:0.8s;
+		display:block;
+	}
+	
+	.singup-btn:hover{
+		transform: scale(0.96);
+		background:rgb(0, 64, 128);
+		color:aliceblue;
+	}
+	
+	.singup-btn1:hover{
+		transform: scale(0.96);
+		background:rgb(0, 64, 128);
+		color:aliceblue;
+	}
+	
+	.singup-form a{
+		text-decoration:none;
+		color:rgb(0, 64, 128);
+		padding:10px;
+		transition:0.8s;
+		display:block;
+	}
+	
+	.singup-btn a:hover{
+		color:aquamarine;
+	}
+	
+	.singup-btn1 a:hover{
+		color:aquamarine;
+	}
+	
+	.grid{
+		display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:10px;
+	}
+	
+	.grid1{
+		display:grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		gap:2px;
+	}
+	
+	.labelClass{
+		text-align:left;
+	}
+	
+	.gridForm{
+		display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:2%;
+	}
+	
+	.grid2{
+		display:grid;
+        gap:10px;
+	}
+	
+	.grid3{
+		display:grid;
+		grid-template-columns: 1fr 20fr 21fr;
+		gap:2px;
+	}
+	
+	.grid4{
+		display:grid;
+		grid-template-columns: 3fr 1fr;
+		gap:2px;
+	}
+	
+	.grid5{
+		display:grid;
+		grid-template-columns: 1fr 2fr;
+		gap:2px;
+	}
+	
+	.grid6{
+		display:grid;
+		grid-template-columns: 1fr 2fr 1fr;
+		gap:2px;
+	}
+	
+	h1{
+		text-align: center;
+		font-family:"Times New Roman";
+		color : rgb(48, 140, 216);
+		font-size: 70px;
+	}
+	
+	h2{
+		text-align: center;
+		font-family:"Times New Roman";
+		color : rgb(48, 140, 216);
+		font-size: 35px;
+	}
+	
+	</style>
+</head>
+<body>
+	<h1>Admin Hesap Ekleme</h1>
+		<form action="AdminPanelAdd.html" th:action="@{/adminPanel/add}" th:object="${kullanici}" method="post">
+			<div class="grid">
+				<div class="singup-form">
+					<h2>Kimlik Bilgileri</h2>
+						<div class="grid2">
+							<input type="text" placeholder="TC No" th:field="*{kullaniciTC}" class="txt" pattern="[0-9].{10}" title="TC Kimlik Numaranız 11 Haneli ve Sayılardan 0luşması Gerekmektedir." required>
+								<div class="grid">
+									<input type="text" placeholder="Ad" th:field="*{kullaniciAd}" class="txt" pattern="[a-zA-Z].{2,}" title="Adınız En Az 3 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+									<input type="text" placeholder="Soyad" th:field="*{kullaniciSoyad}" class="txt" pattern="[a-zA-Z].{2,}" title="Soy Adınız En Az 3 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+									<input type="text" placeholder="Anne" th:field="*{kullaniciAnne}" class="txt" pattern="[a-zA-Z].{2,}" title="Annenizin Adı En Az 3 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+									<input type="text" placeholder="Baba" th:field="*{kullaniciBaba}" class="txt" pattern="[a-zA-Z].{2,}" title="Babanızın Adı En Az 3 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+									<input type="date" placeholder="Dogum Tarihi" th:field="*{kullaniciDogumTarih}" class="txt" min="1961-01-01" max="1999-12-31" title="Formasyona Başvurabilmek için En Az 22, En Fazl 60 Yaşında Olmanız Gerekir." required>
+									<input type="file" accepts="image/png,image/jpg" th:field="*{kullaniciResim}" class="txt" required>
+									<label>Cinsiyet:</label>
+									<label>Özel Durum</label>	
+								</div>
+									<div class="grid1">
+										<input type="radio" th:field="*{kullaniciCinsiyet}" class="radio" value="erkek">
+										<label class="labelClass" for="erkek">Erkek</label>
+										<input type="radio" th:field="*{kullaniciCinsiyet}" class="radio" value="kadin">
+										<label class="labelClass" for="kadın">Kadın</label>
+										<input type="radio" th:field="*{kullaniciOzelDurum}" class="radio" value="evet">
+										<label class="labelClass" for="evet">Evet</label>
+										<input type="radio" th:field="*{kullaniciOzelDurum}" class="radio" value="hayir">
+										<label class="labelClass" for="hayır">Hayır</label>
+									</div>
+										<div class="grid">
+											<h3>Açık Formasyon Bölümleri</h3>
+												<select name="kullaniciFormasyon" required>
+													<option value="nullFormasyon">Seçiniz...</option>
+													<option value="biyoloji">Biyoloji</option>
+													<option value="felsefe">Felsefe</option>
+													<option value="fizik">Fizik</option>
+													<option value="gorselSanatlar">Görsel Sanatlar</option>
+													<option value="grafik">Grafik</option>
+													<option value="imamaHatipMeslekDersler">İmam Hatip Meslek Dersleri</option>
+													<option value="ingilizce">İngilizce</option>
+													<option value="kimya/kimyaTeknolojisi">Kimya/Kimya Teklonojisi</option>
+													<option value="matematik">Matematik</option>
+													<option value="muhasebeVeFinansman">Muhasebe ve Finansman</option>
+													<option value="muzik">Müzik</option>
+													<option value="tarih">Tarih</option>
+													<option value="turkDiliVeEdebiyati">Türk Dili ve Edebiyatı</option>
+													<option value="bedenEgitimi">Beden Eğitimi</option>
+												</select>
+											<a href="#">Formasyon Denklik Tablosu</a>
+										</div>	
+									</div>
+								</div>
+							<div class="singup-form">
+								<h2>İletişim Bilgileri</h2>
+									<div class="grid">
+										<input type="email" placeholder="Mail Adresi" th:field="*{kullaniciMail}" class="txt" required>
+										<input type="text" placeholder="Telefon Numarası" th:field="*{kullaniciTelefon}" class="txt" pattern="[0-9].{3} [0-9].{2} [0-9].{1} [0-9].{1}" title="Telefon Numarası için Yazılacak Format:0123 456 78 90" required>
+									</div>
+								<br>
+									<div class="grid2">
+										<input type="text" placeholder="Adres Bilgisi" th:field="*{kullaniciAdres}" class="txt" pattern="[a-zA-Z].{,200}" title="Adres Bilgisi En Fazla 200 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+									</div>
+								<br>
+									<h2>Eğitim Bilgileri</h2>
+										<div class="grid">
+											<input type="text" placeholder="Üniversite" th:field="*{kullaniciUniversite}" class="txt" pattern="[a-zA-Z].{,100}" title="Üniversite Bilgisi En Fazla 100 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+											<input type="text" placeholder="Fakülte" th:field="*{kullaniciFakulte}" class="txt" pattern="[a-zA-Z].{,100}" title="Fakülte Bilgisi En Fazla 100 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+											<input type="text" placeholder="Bölüm/Program" th:field="*{kullaniciProgram}" class="txt" pattern="[a-zA-Z].{,50}" title="Program Bilgisi En Fazla 50 Haneli ve Harflerden Oluşması Gerekmektedir." required>
+											<input type="date" placeholder="Tarih" th:field="*{kullaniciTarih}" class="txt" min="1983-12-31" title="Formasyona Başvurabilmek için 1983 Yılından Sonra Mezun Olmuş Olmanız Gerekir." required>
+											<br>
+										</div>
+									<div class="grid2">
+										<input type="number" placeholder="Adres Bilgisi" th:field="*{kullaniciMezunNotu}" step="0.01" min="2.0" max="4.0" class="txt" required>
+									</div>
+								</div>
+							</div>
+						<br>
+							<div class="grid">
+							<div class="singup-form1">
+								<div class="grid3">
+											<input type="checkbox" name="kullaniciOnaylama" required/>
+											<label>Bu ön başvuru formunda girdiğim bilgilerin doğru olduğunu beyan eder, yanlış bilgi girişinden kaynaklı tüm sorumluluğun şahsıma ait olduğunu ve bu çerçevede ortaya çıkabilecek tüm hak kaybının bu kapsamda değerlendirileceğini okudum, onaylıyorum.</label>
+											<input type="submit" value="Kişi Ekle" class="singup-btn">
+									</div>
+								</div>
+							</div>
+							</form>		
+								<div class="grid">
+								<div class="singup-form1">
+									<div class="grid6">
+											<label></label>
+												<form action="AdminPanel.html" th:action="@{/adminPanel}">
+												<div class="grid2">
+													<input type="submit" value="Admin Panel" class="singup-btn">
+												</div>	
+												</form>
+												<label></label>
+											</div>
+										</div>							
+									</div>
+</body>
+</html>

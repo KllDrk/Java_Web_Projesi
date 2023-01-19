@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+	<html lang="en" xmlns="https://www.thymeleaf.org">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width,ininal-scale=1.0">
+		<title>Admin Paneli</title>
+		<link rel="stylesheet" href="admin.css">
+	<style>
+	
+	body{
+		margin:0;
+		padding:0;
+		background: rgb(177, 252, 252);
+	}
+	
+	.adminPanel-Form h1{
+		color: rgb(0,0,0);
+		margin-top:10px;
+		font-family:"Times New Roman";
+		text-align:center;
+	}
+	.adminPanel-Form{
+		height:100%;
+		width:100%;
+		text-align:center;
+		background: rgb(123, 232, 240);
+	}
+	
+	.admin-panel{
+		width:100%;
+		background: rgb(123, 232, 240);
+		overflow:hidden;
+	}
+	
+	.grid{
+		display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap:10px;
+	}
+	
+	.content-table{
+		border-collapse : collapse;
+		font-size: 0.9em;
+		width:100%;
+		height:80%;
+		min-width: max-content;
+	}
+	
+	.content-table thead tr{
+		background-color: rgb(48, 140, 216);
+		color : white;
+		text-align: left;
+		position: sticky;
+	}
+	
+	.content-table td,.content-table th{
+		padding: 12px 15px;
+		border:1px solid rgb(48, 140, 216);
+	}
+	
+	.content-table tbody tr:nth-child(even){
+		background: rgb(91, 194, 244);
+	}
+	
+	.content-table tbody tr:nth-child(odd){
+		background: rgb(139, 213, 248);
+	}
+	
+	.content-table th{
+		background:rgb(48, 140, 216);
+		position: sticky;
+		top:0px;
+	}
+	
+	.table-wrapper{
+		max-height:40%;
+		overflow-y:scroll;
+	}
+	
+	.grid1{
+	display:grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap:2%;
+	}
+	.grid2{
+		display:grid;
+        grid-template-columns: 25% 73%;
+        gap:2%;
+	}
+	
+	.grid3{
+		display:grid;
+	}
+	
+	.grid4{
+		display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap:2%;
+	}
+	.grid5{
+		display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap:2%;
+	}
+	
+	.singup-btn{
+	height:50px;
+	background:blueviolent;
+	color:rgb(48, 140, 216);
+	border-radius:100px;
+	font-size:30px;
+	font-family:"Times New Roman";
+	cursor:pointer;
+	transition:0.8s;
+	}
+	
+	.singup-btn:hover{
+		transform: scale(0.96);
+		background:rgb(0, 64, 128);
+		color:aliceblue;
+	}
+	
+	.singup-btn a:hover{
+		color:aquamarine;
+	}
+	
+	.txt{
+	background:rgb(255, 255, 255);
+	}
+	
+	.sorgu-panel input{
+		display: block;
+		width:100%;
+		margin-bottom:5%;
+		padding:0 16px;
+		height: 44px;
+		text-align:center;
+		box-sizing:border-box;
+		border:none;
+	}
+	table{
+		visibility: hidden;
+	}
+	</style>
+</head>
+<body>
+	<!-- table-layout:fixed-->
+	<div class="adminPanel-Form">
+		<h1>ADMİN PANEL</h1>
+			<div class="grid5">
+				<form action="AdminPanelAdd.html" th:action="@{/adminPanel/add}" >
+				<input type="submit" value="Kişi Ekle" class="singup-btn">
+			</form>
+			<form action="AdminPanelEdit.html" th:action="@{/adminPanel/edit}">
+				<input type="submit" value="Kişi Güncelle" class="singup-btn">
+			</form>
+			<form action="AdminPanelDelete.html" th:action="@{/adminPanel/delete}">
+				<input type="submit" value="Kişi Sil" class="singup-btn">
+			</form>
+			<form action="AdminPanelFind.html" th:action="@{/adminPanel/find}">
+				<input type="submit" value="Kişi Bul" class="singup-btn">
+			</form>
+			</div><br>
+			<div class="grid1">
+					<!-- <input onclick="showElem()" type="submit" value="Tablo Göster" class="singup-btn"> -->
+					<div class="grid1">
+					<h3>Tablolar</h3>
+					<select id="Tablolar" onchange="showElem();">
+						<option name="Kimlik Bilgileri" value="Option1">Kimlik Bilgileri</option>
+						<option name="İletişim Bilgileri" value="Option2">İletişim Bilgileri</option>
+						<option name="Eğitim Bilgileri" value="Option3">Eğitim Bilgileri</option>
+					</select>
+					</div>
+					<form action="AdminPanelRandomKullanici.html" th:action="@{/adminPanel/randomKullanici}">
+						<input type="submit" value="Random Kişi Ekle" class="singup-btn">
+					</form>
+					<form action="AdminPanelLog.html" th:action="@{/adminPanel/log}">
+						<input type="submit" value="Log Kayıtları" class="singup-btn">
+					</form>
+				</div><br><br>
+				<form class="admin-panel">
+				<input action="AdminPanel.html" th:action="@{/adminPanel}" th:object="${kullanici}" type="submit" value="Listeyi Güncelle" class="singup-btn">	
+					<div class="grid3">
+							<div class="outer-wrapper">
+								<div class="table-wrapper">
+									<table class="content-table" id="myTable0">
+										<thead class="thead-dark">
+											<th scope="row" onclick="sortTable0(0)">kullaniciID</th>
+											<th scope="row" onclick="sortTable0(1)">kullaniciTC</th>
+											<th scope="row" onclick="sortTable0(2)">kullaniciAd</th>
+											<th scope="row" onclick="sortTable0(3)">kullaniciSoyad</th>
+											<th scope="row" onclick="sortTable0(4)">kullaniciAnne</th>
+											<th scope="row" onclick="sortTable0(5)">kullaniciBaba</th>
+										</thead>
+									<tbody>
+										<tr th:each="kullanici : ${kullanicilar}">
+											<td th:text="${kullanici.kullaniciID}"></td>
+											<td th:text="${kullanici.kullaniciTC}"></td>
+											<td th:text="${kullanici.kullaniciAd}"></td>
+											<td th:text="${kullanici.kullaniciSoyad}"></td>
+											<td th:text="${kullanici.kullaniciAnne}"></td>
+											<td th:text="${kullanici.kullaniciBaba}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+						<div class="grid3">
+							<div class="outer-wrapper">
+								<div class="table-wrapper">
+									<table class="content-table" id="myTable1">
+										<thead class="thead-dark">
+											<th scope="row" onclick="sortTable1(0)">kullaniciDogumTarih</th>
+											<th scope="row" onclick="sortTable1(1)">kullaniciResim</th>
+											<th scope="row" onclick="sortTable1(2)">kullaniciCinsiyet</th>
+											<th scope="row" onclick="sortTable1(3)">kullaniciOzelDurum</th>
+											<th scope="row" onclick="sortTable1(4)">kullaniciFormasyon</th>
+											<th scope="row" onclick="sortTable1(5)">kullaniciMail</th>
+											<th scope="row" onclick="sortTable1(6)">kullaniciTelefon</th>
+											<th scope="row" onclick="sortTable1(7)">kullaniciAdres</th>
+										</thead>
+									<tbody>
+										<tr th:each="kullanici : ${kullanicilar}">
+											<td th:text="${kullanici.kullaniciDogumTarih}">12</td>
+											<td th:file="${kullanici.kullaniciResim}">12</td>
+											<td th:text="${kullanici.kullaniciCinsiyet}">12</td>
+											<td th:text="${kullanici.kullaniciOzelDurum}">12</td>
+											<td th:text="${kullanici.kullaniciFormasyon}">12</td>
+											<td th:text="${kullanici.kullaniciMail}">12</td>
+											<td th:text="${kullanici.kullaniciTelefon}">12</td>
+											<td th:text="${kullanici.kullaniciAdres}">12</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+						<div class="grid3">
+							<div class="outer-wrapper">
+								<div class="table-wrapper">
+									<table class="content-table" id="myTable2">
+										<thead class="thead-dark">
+											<th scope="row" onclick="sortTable2(0)">kullaniciUniversite</th>
+											<th scope="row" onclick="sortTable2(1)">kullaniciFakulte</th>
+											<th scope="row" onclick="sortTable2(2)">kullaniciProgram</th>
+											<th scope="row" onclick="sortTable2(3)">kullaniciTarih</th>
+											<th scope="row" onclick="sortTable2(4)">kullaniciMezunNotu</th>
+										</thead>
+									<tbody>
+										<tr th:each="kullanici : ${kullanicilar}">
+											<td th:text="${kullanici.kullaniciUniversite}">12</td>
+											<td th:text="${kullanici.kullaniciFakulte}">12</td>
+											<td th:text="${kullanici.kullaniciProgram}">12</td>
+											<td th:text="${kullanici.kullaniciTarih}">12</td>
+											<td th:text="${kullanici.kullaniciMezunNotu}">12</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		<script>
+function sortTable0(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable0");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+function sortTable1(n) {
+	  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	  table = document.getElementById("myTable1");
+	  switching = true;
+	  dir = "asc"; 
+	  while (switching) {
+	    switching = false;
+	    rows = table.rows;
+	    for (i = 1; i < (rows.length - 1); i++) {
+	      shouldSwitch = false;
+	      x = rows[i].getElementsByTagName("TD")[n];
+	      y = rows[i + 1].getElementsByTagName("TD")[n];
+	      if (dir == "asc") {
+	        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+	          shouldSwitch= true;
+	          break;
+	        }
+	      } else if (dir == "desc") {
+	        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+	          shouldSwitch = true;
+	          break;
+	        }
+	      }
+	    }
+	    if (shouldSwitch) {
+	      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+	      switching = true;   
+	      switchcount ++;
+	    } else {
+	      if (switchcount == 0 && dir == "asc") {
+	        dir = "desc";
+	        switching = true;
+	      }
+	    }
+	  }
+	}
+function sortTable2(n) {
+	  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+	  table = document.getElementById("myTable2");
+	  switching = true;
+	  dir = "asc"; 
+	  while (switching) {
+	    switching = false;
+	    rows = table.rows;
+	    for (i = 1; i < (rows.length - 1); i++) {
+	      shouldSwitch = false;
+	      x = rows[i].getElementsByTagName("TD")[n];
+	      y = rows[i + 1].getElementsByTagName("TD")[n];
+	      if (dir == "asc") {
+	        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+	          shouldSwitch= true;
+	          break;
+	        }
+	      } else if (dir == "desc") {
+	        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+	          shouldSwitch = true;
+	          break;
+	        }
+	      }
+	    }
+	    if (shouldSwitch) {
+	      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+	      switching = true;
+	      switchcount ++;      
+	    } else {
+	      if (switchcount == 0 && dir == "asc") {
+	        dir = "desc";
+	        switching = true;
+	      }
+	    }
+	  }
+	}
+function showElem() {
+	var selectedValue = document.getElementById("Tablolar").value;
+	document.getElementById("myTable0").style.visibility = "hidden"; 
+	document.getElementById("myTable1").style.visibility = "hidden"; 
+	document.getElementById("myTable2").style.visibility = "hidden";
+	switch(selectedValue){
+	case "Option1":{
+		document.getElementById("myTable0").style.visibility = "visible"; 
+		break;
+	}
+	case "Option2":{
+		document.getElementById("myTable1").style.visibility = "visible"; 
+		break;
+	}
+	case "Option3":{
+		document.getElementById("myTable2").style.visibility = "visible"; 
+		break;
+	}
+	default:{
+		break;
+	}
+	}
+	console.log(selectedValue);
+	}
+</script>
+</body>
+</html>
